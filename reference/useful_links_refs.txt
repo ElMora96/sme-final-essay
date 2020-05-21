@@ -1,5 +1,10 @@
 https://quantecon.org/notebooks/
 #Discrete-time aiyagari
 https://github.com/QuantEcon/lecture-python.notebooks/blob/master/aiyagari.ipynb #notebook
+https://python.quantecon.org/aiyagari.html #lesson 
+
 #continuous-time aiyagari
 https://nbviewer.jupyter.org/github/QuantEcon/QuantEcon.notebooks/blob/master/aiyagari_continuous_time.ipynbZ
+
+#testline
+
