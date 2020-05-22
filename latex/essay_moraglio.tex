@@ -1,0 +1,132 @@
+\documentclass[12pt]{article}
+
+%packages
+\usepackage[utf8]{inputenc}% codifica d'entrata
+\usepackage[T1]{fontenc}%    codifica dei font
+\usepackage{lmodern}%    
+
+\usepackage{hyperref} %references
+
+\hypersetup{%
+    pdfpagemode={UseOutlines},
+    bookmarksopen,
+    pdfstartview={FitH},
+    colorlinks,
+    linkcolor={blue},
+    citecolor={blue},
+    urlcolor={blue}
+  }
+
+\usepackage{mathrsfs,amssymb,amsfonts,amsthm,amsmath,amsbsy} %math
+\usepackage{natbib} %bibliography
+%% Setting the line spacing 
+
+% TITLE:
+\title{Aiyagari Model in Discrete \& Continuos Time: Numerical Approach
+\thanks{Paper prepared for the exam of Simulation Models in Economics.}
+}
+\author{Francesco Moraglio}
+
+% DATE:
+\date{\today}
+
+
+%DOCUMENT
+\begin{document}
+\maketitle
+
+%ABSTRACT
+\begin{abstract}
+% CONTENT OF ABS HERE--------------------------------------
+Hello dear 
+
+% END CONTENT ABS------------------------------------------
+\noindent
+\textit{\textbf{Keywords: }%
+key1; key2; key3; key4.} \\ %% <-- Keywords HERE!
+
+\end{abstract}
+
+\section{Introduction}
+intro
+\section{Aiyagari Model}
+\subsection{Theoretical Foundations}
+In this section the theory of the model is exposed according to the original work, that is \cite{aiya94}.
+Aiyagari model features ... \\
+It is now needed to fix some notations. Let $c_t$ and $a_t$ denote period $t$ consumption and assets, respectively. Moreover let $l_t$ be the labor endowment, an exogenous component of labor income capturing stochastic unemployment risk, etc. Such $l_t$'s are assumed to be i.i.d. with bounded, positive range; $l_t \in \left[l_{min}, l_{max} \right]$. Denote by $U(c)$ the utility function and  by $\beta$ the discount factor, with
+\begin{equation}
+\lambda = \frac{1 - \beta}{\beta}
+\end{equation}
+being the time preference rate. Also let $r$ be the net interest rate on assets and $w$ be the wage. With these conventions, the individual's problem is to maximize
+\begin{equation}
+\mathbb E \left[ \sum_{t=0}^{\infty} \beta^t u(c_t) \right],
+\end{equation}
+subject to 
+\begin{align}
+\label{constraints}
+&a_{t+1} + c_t = wl_t + (1+r)a_t; \nonumber \\
+&c_t \geq 0; \nonumber \\
+&a_t \geq -\phi \quad a.s .
+\end{align}
+where $\phi$ is the borrowing limit. More precisely, it is defined to be
+\begin{equation}
+\phi = \begin{cases}
+		min\{b, \frac{wl_{min}}{r} \} \quad \text{if} \quad r \geq 0 \\
+		b \quad \text{otherwise,}
+		\end{cases}
+\end{equation}
+where $b$ is the (fixed) maximum amount that the agent is allowed to borrow. Such definition is required for the model to be compatible with negative interest rates. \\
+Define now
+\begin{align}
+\label{hata}
+\hat{a}_t = a_t + \phi \\
+z_t = wl_t + (1 + r)\hat{a}_t -r\phi,
+\end{align}
+where $z_t$ can be thought of as the total resources of the individual. Using the last definitions, constraints \ref{constraints} can be rewritten as follows:
+\begin{align}
+\label{newconstraint}
+&\hat{a}_{t+1} + c_t = z_t;  \\
+&c_t \geq 0; \nonumber \\
+&\hat{a}_t \geq 0; \nonumber \\
+&z_{t+1} = wl_{t+1} + (1 + r)\hat{a}_{t+1} - r\phi.
+\end{align}
+Now consider the Bellman Equation:
+\begin{equation}
+\label{bellmaneq}
+V\left(z_t, b, w, r \right) = \max_{\hat{a}_{t+1}}\left[U\left(z_t - \hat{a}_{t+1}\right) + \beta \int V(z_{t+1},b, w,r)dF(l_{t+1}) \right].
+\end{equation}
+The unique solution to such equation is the optimal value function for the agent with total resources $z_t$. Furthermore, the optimal asset demand function can be obtain by solving the maximization on the right-hand side of \ref{bellmaneq}, that yields
+\begin{equation}
+\label{demand}
+\hat{a}_{t+1} = A(z_t, b, w, r).
+\end{equation}
+It is to remark that the above function is continuous. By substituting it into \ref{newconstraint}, one obtains the transition law for total resources:
+\begin{equation}
+\label{transition}
+z_{t+1} = wl_{t+1} + (1+r)A(z_t, b, w, r) - r\phi.
+\end{equation}
+Clearly, the agent would like to borrow but is limited by the borrowing limit. As total resources get smaller and smaller, the individual borrows more and more in order to maintain current consumption, and his debt approaches the borrowing limit. Thus, there exists a positive value $\hat{z}>z_{min}=wl_{min} - r\phi \geq 0$ such that, whenever $z_t \leq \hat{z}$, it is optimal to consume all of the total resources and set
+\begin{equation*}
+\begin{cases}
+c_t = z_t \\
+\hat{a}_{t+1} = 0.
+\end{cases}
+\end{equation*}
+Equation \ref{transition} defines a Markov process that, under some additional assumptions, is bounded. These conditions also guarantee that there exists a unique, stable stationary distribution for $z_t$ for $\{z_t\}_t$, which behaves continuously with respect to the parameters $b$, $w$ and $r$. More mathematical detail on these facts can be found in \cite{aiya93}. \\
+Let now $\mathbb E\left[ a_w \right]$ denote the long-run average assets, where the subscript reflects the fact that $w$ is being treated as fixed. Now, using \ref{hata} and \ref{demand}, such quantity is given by:
+\begin{equation}
+\mathbb E\left[a_w \right] = \mathbb E \left[A(z_t, b, w, r)\right] - \phi,
+\end{equation}
+where the expectation is taken with respect to the stationary distribution of $\{z_t\}_t$. Such distribution and the value of $\mathbb E\left[a_w \right]$ reflect the endogenous heterogeneity and the aggregation features. In particular, $\mathbb E\left[a_w \right]$ represents the aggregate assets of the population, consistent with the distribution of assets across the population implied by individual optimal saving behavior. \\
+Note that, if earnings were certain, it would hold $\mathbb E\left[a_w \right] = -\phi$, for all $r < \lambda$. That is, per capita assets under certainty are at their lowest permissible level since all agents are alike and everyone is constrained. However, in a steady state under uncertainty, individuals have different total resources. Those with low total resources will continue to be liquidity constrained, while those with high total resources will accumulate assets beyond the constrained level. A mathematical justification of these behavior can be found in \cite{aiya94}.
+
+\section{Conclusion}
+bye bye
+
+
+\newpage
+\begin{thebibliography}{99}
+\bibitem[Aiyagari (1994)]{aiya94} {\sc Aiyagari, S. R.} (1994). \textit{UNINSURED IDIOSYNCRATIC RISK AND AGGREGATE SAVING}. The Quarterly Journal of Economics, 109, Oxford University Press.
+\bibitem[Aiyagari (1993)]{aiya93} {\sc Aiyagari, S. R.} (1993). \textit{Uninsured Idiosyncratic Risk and Aggregate Saving}. Research Department Working Paper 502, Federal Reserve Bank of Minneapolis.
+\end{thebibliography}
+\end{document}
