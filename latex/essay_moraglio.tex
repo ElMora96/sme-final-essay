@@ -53,12 +53,13 @@ intro
 \subsection{Theoretical Foundations}
 In this section the theory of the model is exposed according to the original work, that is \cite{aiya94}.
 Aiyagari model features ... \\
-It is now needed to fix some notations. Let $c_t$ and $a_t$ denote period $t$ consumption and assets, respectively. Moreover let $l_t$ be the labor endowment, an exogenous component of labor income capturing stochastic unemployment risk, etc. Such $l_t$'s are assumed to be i.i.d. with bounded, positive range; $l_t \in \left[l_{min}, l_{max} \right]$. Denote by $U(c)$ the utility function and  by $\beta$ the discount factor, with
+It is now needed to fix some notations. Let $c_t$ and $a_t$ denote period $t$ consumption and assets, respectively. Moreover let $l_t$ be the labor endowment. Such $l_t$'s are assumed to be i.i.d. with bounded, positive range; $l_t \in \left[l_{min}, l_{max} \right]$. Denote by $U(c)$ the utility function and  by $\beta$ the discount factor, with
 \begin{equation}
 \lambda = \frac{1 - \beta}{\beta}
 \end{equation}
 being the time preference rate. Also let $r$ be the net interest rate on assets and $w$ be the wage. With these conventions, the individual's problem is to maximize
 \begin{equation}
+\label{problem}
 \mathbb E \left[ \sum_{t=0}^{\infty} \beta^t u(c_t) \right],
 \end{equation}
 subject to 
@@ -118,15 +119,68 @@ Let now $\mathbb E\left[ a_w \right]$ denote the long-run average assets, where 
 \mathbb E\left[a_w \right] = \mathbb E \left[A(z_t, b, w, r)\right] - \phi,
 \end{equation}
 where the expectation is taken with respect to the stationary distribution of $\{z_t\}_t$. Such distribution and the value of $\mathbb E\left[a_w \right]$ reflect the endogenous heterogeneity and the aggregation features. In particular, $\mathbb E\left[a_w \right]$ represents the aggregate assets of the population, consistent with the distribution of assets across the population implied by individual optimal saving behavior. \\
-Note that, if earnings were certain, it would hold $\mathbb E\left[a_w \right] = -\phi$, for all $r < \lambda$. That is, per capita assets under certainty are at their lowest permissible level since all agents are alike and everyone is constrained. However, in a steady state under uncertainty, individuals have different total resources. Those with low total resources will continue to be liquidity constrained, while those with high total resources will accumulate assets beyond the constrained level. A mathematical justification of these behavior can be found in \cite{aiya94}.
-
+Note that, if earnings were certain, it would hold $\mathbb E\left[a_w \right] = -\phi$, for all $r < \lambda$. That is, per capita assets under certainty are at their lowest permissible level since all agents are alike and everyone is constrained. However, in a steady state under uncertainty, individuals have different total resources. Those with low total resources will continue to be liquidity constrained, while those with high total resources will accumulate assets beyond the constrained level. A mathematical justification of these behavior can be found in \cite{aiya94}. \\
+This concludes the description of the economy model; as for the treatment of the equilibrium for this general case, a complete discussion can be found in the aforementioned publication. This paper's aim, however, is to solve such equilibrium numerically. Hence, in the following we present (and solve) a simplified model.\\
+\subsection{Equilibrium of simplified Aiyagari Model in Discrete Time} 
+The numerical treatment of this model in its discrete-time, simplified version is taken from \cite{quantecdisc}. \\
+Also in this version, the savings problem faced by a typical household/consumer is to maximize \ref{problem}. Constrains are also similar to \ref{constraints}, but main difference is that they're considered in inequality form, that is:
+\begin{align}
+&a_{t+1} + c_t \leq wz_t + (1+r)a_t; \nonumber \\
+&c_t \geq 0; \nonumber \\
+&a_t \geq -\phi \quad a.s .
+\end{align}
+Note in this case we don't consider the labor endowment $l_t$ as before, but directly $z_t$, that can be regarded as the exogenous component of labor income capturing stochastic unemployment risk, etc. In discrete time, the exogenous process $\{z_t\}_t$ defines a finite-state Markov chain (with given transition matrix $P$). In this simple version of the model, households supply labor inelastically since they do not value leisure. \\
+Firms produce output by hiring capital and labor, acting competitively and facing constant returns to scale. Given this last assumption, the number of firms does not matter: we can consider a single (but nonetheless competitive) representative firm. Such firms's output is
+\begin{equation}
+Y_t = AK_t^\alpha N^{1-\alpha},
+\end{equation}
+where $A>0$ and $\alpha \in (0,1)$ are parameters and
+\begin{itemize}
+\item $K_t$ is the aggregate capital;
+\item $N$ is the total labor supply, which is constant in this simple version of the model.
+\end{itemize}
+The firm's problem is 
+\begin{equation}
+\max_{K,N}\left[AK_t^\alpha N^{1-\alpha} - (r + \delta)K -wN \right], 
+\end{equation}
+where $\delta$ denotes the depreciation rate. \\
+From the FOC with respect to capital, the firm's inverse demand for capital is 
+\begin{equation}
+\label{invdem}
+r = A\alpha\left(\frac{N}{K} \right)^{1 - \alpha} - \delta.
+\end{equation}
+Using last expression and the FOC for labor, the equilibrium wage rate can be written as a function of r:
+\begin{equation}
+\label{wagerate}
+w(r) = A(1 - \alpha)\left(\frac{A\alpha}{r + \delta} \right)^{\frac{\alpha}{1- \alpha}}.
+\end{equation}
+In this setting, a \textit{Stationary Rational Expectations Equilibrium} (SREE) can be built. In such an equilibrium, prices induce behavior that generates aggregate quantities (consistent with prices). Moreover, aggregate quantities and prices are constant over time. In practice, once parameter values are set, we can check for an SREE by the following steps:
+\begin{enumerate}
+\item pick a proposed quantity $K$ for capital;
+\item determine corresponding prices, with interest rate $r$ given by \ref{invdem} and wage rate $w(r)$ as given in \ref{wagerate};
+\item determine the common optimal savings policy of the households given these prices;
+\item compute aggregate capital as the mean of steady state capital given this savings policy.
+\end{enumerate}
+If this final quantity agrees with $K$, then we have a SREE.
+\subsection{Numerical Solution}
+The code I'm referring to can be found in the attached script \texttt{aiyagari.py}.
+To solve the problem exposed in previous section, one can make use \texttt{DiscreteDP} class from python the library \texttt{QuantEcon.py}. \\
+To generate an instance of such class, after setting the parameters of interest in the \texttt{\_\_init\_\_} method, arrays \texttt{Q} and \texttt{R} are required. More precisely,
+\begin{itemize}
+\item \texttt{R} is a matrix where \texttt{R[s, a]} is the reward at state \texttt{s} under action \texttt{a};
+\item \texttt{Q} is a three-dimensional array where \texttt{Q[s, a, s']} is the probability of transitioning to state \texttt{s'} when the current state is \texttt{s} and the current action is \texttt{a}.
+\end{itemize}
+Here we take the state to be 
+\begin{equation}
+s_t = \left(a_t, z_t\right),
+\end{equation}
+where $a_t$ is the asset and $z_t$ is the shock. The action is the choice of next period asset level $a_{t+1}$.
 \section{Conclusion}
-bye bye
-
 
 \newpage
 \begin{thebibliography}{99}
 \bibitem[Aiyagari (1994)]{aiya94} {\sc Aiyagari, S. R.} (1994). \textit{UNINSURED IDIOSYNCRATIC RISK AND AGGREGATE SAVING}. The Quarterly Journal of Economics, 109, Oxford University Press.
 \bibitem[Aiyagari (1993)]{aiya93} {\sc Aiyagari, S. R.} (1993). \textit{Uninsured Idiosyncratic Risk and Aggregate Saving}. Research Department Working Paper 502, Federal Reserve Bank of Minneapolis.
+\bibitem[QuantEcon (1)]{quantecdisc} \texttt{https://python.quantecon.org/aiyagari.html}
 \end{thebibliography}
 \end{document}
