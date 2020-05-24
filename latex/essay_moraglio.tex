@@ -4,7 +4,8 @@
 \usepackage[utf8]{inputenc}% codifica d'entrata
 \usepackage[T1]{fontenc}%    codifica dei font
 \usepackage{lmodern}%    
-
+\usepackage{graphicx}
+\graphicspath{ {../picture/} }
 \usepackage{hyperref} %references
 
 \hypersetup{%
@@ -22,7 +23,7 @@
 %% Setting the line spacing 
 
 % TITLE:
-\title{Aiyagari Model in Discrete \& Continuos Time: Numerical Approach
+\title{Aiyagari Model in Discrete Time: Mathematical Foundations \& Numerical Approach
 \thanks{Paper prepared for the exam of Simulation Models in Economics.}
 }
 \author{Francesco Moraglio}
@@ -175,7 +176,28 @@ Here we take the state to be
 s_t = \left(a_t, z_t\right),
 \end{equation}
 where $a_t$ is the asset and $z_t$ is the shock. The action is the choice of next period asset level $a_{t+1}$.
+\subsection{Results}
+After defining the required class in first part of the script, an optimal accumulation policy at fixed prices is computed and plotted. Result is reported below (see \ref{plot:policy}).  \\ 
+\begin{figure}[]
+\label{plot:policy}
+\centering
+\includegraphics[scale = 0.8]{accumulation_policy.png}
+\caption{Example of optimal accumulation policy at fixed prices.}
+\end{figure}
+
+After that, the equilibrium is calculated visually: last part of the code draws aggregate supply and demand curves. The intersection gives equilibrium interest rates and capital, as can be seen in figure \ref{plot:equilibrium}.
+\begin{figure}[]
+\label{plot:equilibrium}
+\centering
+\includegraphics[scale = 0.8]{equilibrium.png}
+\caption{Example of equilibrium for Aiyagari model.}
+\end{figure}
+
+
+\newpage
 \section{Conclusion}
+
+\listoffigures
 
 \newpage
 \begin{thebibliography}{99}
