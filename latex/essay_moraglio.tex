@@ -36,25 +36,15 @@
 \begin{document}
 \maketitle
 
-%ABSTRACT
-\begin{abstract}
-% CONTENT OF ABS HERE--------------------------------------
-Hello dear 
-
-% END CONTENT ABS------------------------------------------
-\noindent
-\textit{\textbf{Keywords: }%
-key1; key2; key3; key4.} \\ %% <-- Keywords HERE!
-
-\end{abstract}
 
 \section{Introduction}
-intro
+Rao Aiyagari's works focus on the differences  between aggregate and individual data. In particular, individual earnings, savings, wealth and labor exhibit much larger fluctuations over time than per-capita averages. This economist understood such heterogeneity has important implications for the understanding of aggregate economic data and can provide new insights on the role of various economic policies. \\
+In this paper, the Aiyagari-Bewley economic model is presented. It was first proposed by Bewley (see \cite{bewley}), developed further by Aiyagari in the nineties and became a leading model for dynamic macroeconomics. More in detail, implications of precautionary saving due to individual earning risks and borrowing constraints for aggregate savings are investigated. \\
+This work also includes the numerical treatment of a simplified version of Aiyagari model, using python programming language.
 \section{Aiyagari Model}
 \subsection{Theoretical Foundations}
-In this section the theory of the model is exposed according to the original work, that is \cite{aiya94}.
-Aiyagari model features ... \\
-It is now needed to fix some notations. Let $c_t$ and $a_t$ denote period $t$ consumption and assets, respectively. Moreover let $l_t$ be the labor endowment. Such $l_t$'s are assumed to be i.i.d. with bounded, positive range; $l_t \in \left[l_{min}, l_{max} \right]$. Denote by $U(c)$ the utility function and  by $\beta$ the discount factor, with
+In this section the theory of the model is exposed according to the original work, that is \cite{aiya94}. \\
+Let's fix some notations. Let $c_t$ and $a_t$ denote period $t$ consumption and assets, respectively. Moreover let $l_t$ be the labor endowment. Such $l_t$'s are assumed to be i.i.d. with bounded, positive range; $l_t \in \left[l_{min}, l_{max} \right]$. Denote by $U(c)$ the utility function and  by $\beta$ the discount factor, with
 \begin{equation}
 \lambda = \frac{1 - \beta}{\beta}
 \end{equation}
@@ -192,17 +182,23 @@ After that, the equilibrium is calculated visually: last part of the code draws 
 \includegraphics[scale = 0.8]{equilibrium.png}
 \caption{Example of equilibrium for Aiyagari model.}
 \end{figure}
-
+.
 
 \newpage
 \section{Conclusion}
-
-\listoffigures
+This paper only deals with a restriction of Aiyagari's original works. Such economist's later research ranges from setting taxes to marriage patterns and it would be interesting to explore numerical solutions to these settings. \\
+As for Aiyagari-Bewley model, a recent extension can be found in \cite{aiyacont}. The model is here presented in a continuous-time version and modern software tools allow to solve such extension numerically.
 
 \newpage
+\listoffigures
+
 \begin{thebibliography}{99}
+\bibitem[Bewley (1986)]{bewley} {\sc Bewley, T.} (1986).  \textit{Stationary Monetary Equilibrium With a Continuum of Independently Fluctuating Consumers}. Contributions to Mathematical Economics in Honor of Gérard Debreu.
+
 \bibitem[Aiyagari (1994)]{aiya94} {\sc Aiyagari, S. R.} (1994). \textit{UNINSURED IDIOSYNCRATIC RISK AND AGGREGATE SAVING}. The Quarterly Journal of Economics, 109, Oxford University Press.
 \bibitem[Aiyagari (1993)]{aiya93} {\sc Aiyagari, S. R.} (1993). \textit{Uninsured Idiosyncratic Risk and Aggregate Saving}. Research Department Working Paper 502, Federal Reserve Bank of Minneapolis.
-\bibitem[QuantEcon (1)]{quantecdisc} \texttt{https://python.quantecon.org/aiyagari.html}
+\bibitem[QuantEcon (1)]{quantecdisc} {\sc QuantEcon.}  \textit{The Aiyagari Model.} \texttt{https://python.quantecon.org/aiyagari.html}
+
+\bibitem[Achdou et al. (2017)]{aiyacont} {\sc Achdou, Y.}, {\sc Han, J.}, {\sc Lasry J. M.}, {\sc Lions P. L.} amd {\sc Moll, B.} (2017). \textit{Income and Wealth Distribution in Macroeconomics: A Continuous-Time Approach}. Princeton University.
 \end{thebibliography}
 \end{document}
