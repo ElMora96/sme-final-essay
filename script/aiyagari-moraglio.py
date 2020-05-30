@@ -36,7 +36,7 @@ class Household:
                 w=1.0,                       # Wages
                 beta=0.96,                      # Discount factor
                 a_min=1e-10,
-                Π=[[0.9, 0.1], [0.1, 0.9]],  # Markov chain
+                Pi=[[0.9, 0.1], [0.1, 0.9]],  # Markov chain
                 z_vals=[0.1, 1.0],           # Exogenous states
                 a_max=18,
                 a_size=200):
@@ -45,7 +45,7 @@ class Household:
         self.r, self.w, self.beta = r, w, beta
         self.a_min, self.a_max, self.a_size = a_min, a_max, a_size
 
-        self.Π = np.asarray(Π)
+        self.Pi = np.asarray(Pi)
         self.z_vals = np.asarray(z_vals)
         self.z_size = len(z_vals)
 
@@ -69,7 +69,7 @@ class Household:
         self.build_R()
 
     def build_Q(self):
-        populate_Q(self.Q, self.a_size, self.z_size, self.Π)
+        populate_Q(self.Q, self.a_size, self.z_size, self.Pi)
 
     def build_R(self):
         self.R.fill(-np.inf)
@@ -99,13 +99,13 @@ def populate_R(R, a_size, z_size, a_vals, z_vals, r, w):
                 R[s_i, new_a_i] = np.log(c)  # Utility
 
 @jit(nopython=True)
-def populate_Q(Q, a_size, z_size, Π):
+def populate_Q(Q, a_size, z_size, Pi):
     n = a_size * z_size
     for s_i in range(n):
         z_i = s_i % z_size
         for a_i in range(a_size):
             for next_z_i in range(z_size):
-                Q[s_i, a_i, a_i*z_size + next_z_i] = Π[z_i, next_z_i]
+                Q[s_i, a_i, a_i*z_size + next_z_i] = Pi[z_i, next_z_i]
 
 
 @jit(nopython=True)

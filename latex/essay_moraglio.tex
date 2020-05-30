@@ -71,10 +71,10 @@ where $b$ is the (fixed) maximum amount that the agent is allowed to borrow. Suc
 Define now
 \begin{align}
 \label{hata}
-\hat{a}_t = a_t + \phi \\
-z_t = wl_t + (1 + r)\hat{a}_t -r\phi,
+\hat{a}_t &= a_t + \phi; \\
+z_t &= wl_t + (1 + r)\hat{a}_t -r\phi,
 \end{align}
-where $z_t$ can be thought of as the total resources of the individual. Using the last definitions, constraints \ref{constraints} can be rewritten as follows:
+where $z_t$ can be thought of as the total resources of the individual. Using the last definitions, constraints (\ref{constraints}) can be rewritten as follows:
 \begin{align}
 \label{newconstraint}
 &\hat{a}_{t+1} + c_t = z_t;  \\
@@ -82,7 +82,7 @@ where $z_t$ can be thought of as the total resources of the individual. Using th
 &\hat{a}_t \geq 0; \nonumber \\
 &z_{t+1} = wl_{t+1} + (1 + r)\hat{a}_{t+1} - r\phi.
 \end{align}
-Now consider the Bellman Equation:
+Consider now the Bellman Equation:
 \begin{equation}
 \label{bellmaneq}
 V\left(z_t, b, w, r \right) = \max_{\hat{a}_{t+1}}\left[U\left(z_t - \hat{a}_{t+1}\right) + \beta \int V(z_{t+1},b, w,r)dF(l_{t+1}) \right].
@@ -104,7 +104,7 @@ c_t = z_t \\
 \hat{a}_{t+1} = 0.
 \end{cases}
 \end{equation*}
-Equation \ref{transition} defines a Markov process that, under some additional assumptions, is bounded. These conditions also guarantee that there exists a unique, stable stationary distribution for $z_t$ for $\{z_t\}_t$, which behaves continuously with respect to the parameters $b$, $w$ and $r$. More mathematical detail on these facts can be found in \cite{aiya93}. \\
+Equation \ref{transition} defines a Markov process that, under some additional assumptions, is bounded. These conditions also guarantee that there exists a unique, stable stationary distribution for $\{z_t\}_t$, which behaves continuously with respect to the parameters $b$, $w$ and $r$. More mathematical detail on these facts can be found in \cite{aiya93}. \\
 Let now $\mathbb E\left[ a_w \right]$ denote the long-run average assets, where the subscript reflects the fact that $w$ is being treated as fixed. Now, using \ref{hata} and \ref{demand}, such quantity is given by:
 \begin{equation}
 \mathbb E\left[a_w \right] = \mathbb E \left[A(z_t, b, w, r)\right] - \phi,
@@ -155,7 +155,7 @@ In this setting, a \textit{Stationary Rational Expectations Equilibrium} (SREE) 
 If this final quantity agrees with $K$, then we have a SREE.
 \subsection{Numerical Solution}
 The code I'm referring to can be found in the attached script \texttt{aiyagari.py}.
-To solve the problem exposed in previous section, one can make use \texttt{DiscreteDP} class from python the library \texttt{QuantEcon.py}. \\
+To solve the problem exposed in previous section, one can make use \texttt{DiscreteDP} class from the python library \texttt{QuantEcon.py}. \\
 To generate an instance of such class, after setting the parameters of interest in the \texttt{\_\_init\_\_} method, arrays \texttt{Q} and \texttt{R} are required. More precisely,
 \begin{itemize}
 \item \texttt{R} is a matrix where \texttt{R[s, a]} is the reward at state \texttt{s} under action \texttt{a};
@@ -169,18 +169,18 @@ where $a_t$ is the asset and $z_t$ is the shock. The action is the choice of nex
 \subsection{Results}
 After defining the required class in first part of the script, an optimal accumulation policy at fixed prices is computed and plotted. Result is reported below (see \ref{plot:policy}).  \\ 
 \begin{figure}[]
-\label{plot:policy}
 \centering
-\includegraphics[scale = 0.8]{accumulation_policy.png}
 \caption{Example of optimal accumulation policy at fixed prices.}
+\label{plot:policy}
+\includegraphics[scale = 0.8]{accumulation_policy.png}
 \end{figure}
 
 After that, the equilibrium is calculated visually: last part of the code draws aggregate supply and demand curves. The intersection gives equilibrium interest rates and capital, as can be seen in figure \ref{plot:equilibrium}.
 \begin{figure}[]
-\label{plot:equilibrium}
 \centering
-\includegraphics[scale = 0.8]{equilibrium.png}
 \caption{Example of equilibrium for Aiyagari model.}
+\label{plot:equilibrium}
+\includegraphics[scale = 0.8]{equilibrium.png}
 \end{figure}
 .
 

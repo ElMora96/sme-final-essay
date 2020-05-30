@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2020.5.13)  27 MAY 2020 10:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2020.5.13)  30 MAY 2020 10:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -483,7 +483,7 @@ LaTeX Warning: No positions in optional float specifier.
 File: ../picture/accumulation_policy.png Graphic file (type png)
 <use ../picture/accumulation_policy.png>
 Package pdftex.def Info: ../picture/accumulation_policy.png  used on input line
- 174.
+ 175.
 (pdftex.def)             Requested size: 382.74243pt x 393.7275pt.
 
 LaTeX Warning: No positions in optional float specifier.
@@ -492,7 +492,7 @@ LaTeX Warning: No positions in optional float specifier.
 <../picture/equilibrium.png, id=116, 478.4274pt x 492.1587pt>
 File: ../picture/equilibrium.png Graphic file (type png)
 <use ../picture/equilibrium.png>
-Package pdftex.def Info: ../picture/equilibrium.png  used on input line 182.
+Package pdftex.def Info: ../picture/equilibrium.png  used on input line 183.
 (pdftex.def)             Requested size: 382.74243pt x 393.7275pt.
 [6] [7 <../picture/accumulation_policy.png>] [8 <../picture/equilibrium.png>]
 [9] (./essay_moraglio.lof)
@@ -518,7 +518,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 204.
 Here is how much of TeX's memory you used:
  7128 strings out of 492167
  99272 string characters out of 6131558
- 192475 words of memory out of 5000000
+ 192546 words of memory out of 5000000
  11317 multiletter control sequences out of 15000+600000
  75722 words of font info for 78 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -540,7 +540,7 @@ e/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf-dist/fonts/type
 usr/share/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/share/texmf-dist/fon
 ts/type1/public/lm/lmtt12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfont
 s/symbols/msbm10.pfb>
-Output written on essay_moraglio.pdf (10 pages, 334253 bytes).
+Output written on essay_moraglio.pdf (10 pages, 334243 bytes).
 PDF statistics:
  234 PDF objects out of 1000 (max. 8388607)
  198 compressed objects within 2 object streams
